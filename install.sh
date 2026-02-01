@@ -14,14 +14,19 @@ echo "Installing dotfiles from $DOTFILES_DIR"
 link_file() {
     local filename="$1"
     local src="$DOTFILES_DIR/files/$filename"
-    local dest="$HOME/.$filename"
-    
+    # If filename already starts with a dot, don't add another one
+    if [[ "$filename" == .* ]]; then
+        local dest="$HOME/$filename"
+    else
+        local dest="$HOME/.$filename"
+    fi
+
     # Backup existing file if it's not already a symlink
     if [ -e "$dest" ] && [ ! -L "$dest" ]; then
         echo "Backing up existing $dest to $dest.backup"
         mv "$dest" "$dest.backup"
     fi
-    
+
     # Create symlink
     ln -sf "$src" "$dest"
     echo "Linked $dest -> $src"
@@ -35,12 +40,15 @@ if [ ! -d "$DOTFILES_DIR/files" ]; then
 fi
 
 # Link all files in the files directory
+# Enable dotglob to match hidden files
+shopt -s dotglob nullglob
 for file in "$DOTFILES_DIR/files"/*; do
     if [ -f "$file" ]; then
         filename=$(basename "$file")
         link_file "$filename"
     fi
 done
+shopt -u dotglob nullglob
 
 echo ""
 
