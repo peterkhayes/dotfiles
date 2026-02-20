@@ -1,0 +1,5 @@
+---
+"pane_group:navigate_left": none
+"workspace:activate_next_tab": alt-cmd-right
+"workspace:activate_prev_tab": alt-cmd-left
+"pane_group:navigate_right": none

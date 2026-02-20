@@ -1,0 +1,401 @@
+// Place your key bindings in this file to override the defaults
+[
+  // Move lines up and down
+  {
+    "key": "cmd+ctrl+up",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+ctrl+down",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // Deleting left and right, words and lines
+  {
+    "key": "ctrl+backspace",
+    "command": "deleteRight",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+backspace",
+    "command": "deleteWordLeft",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+ctrl+backspace",
+    "command": "deleteWordRight",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+delete",
+    "command": "deleteWordRight",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+backspace",
+    "command": "deleteAllLeft",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+ctrl+backspace",
+    "command": "deleteAllRight",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+delete",
+    "command": "deleteAllRight",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // Move by paragraph
+  {
+    "key": "alt+up",
+    "command": "spaceBlockJumper.moveUp"
+  },
+  {
+    "key": "alt+down",
+    "command": "spaceBlockJumper.moveDown"
+  },
+  {
+    "key": "alt+shift+up",
+    "command": "spaceBlockJumper.selectUp"
+  },
+  {
+    "key": "alt+shift+down",
+    "command": "spaceBlockJumper.selectDown"
+  },
+  // Window manipulation
+  {
+    "key": "cmd+alt+shift+left",
+    "command": "workbench.action.moveEditorLeftInGroup"
+  },
+  {
+    "key": "cmd+alt+shift+right",
+    "command": "workbench.action.moveEditorRightInGroup"
+  },
+  {
+    "key": "cmd+k shift+left",
+    "command": "workbench.action.moveEditorToPreviousGroup"
+  },
+  {
+    "key": "cmd+k shift+right",
+    "command": "workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "cmd+k right",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "cmd+k left",
+    "command": "workbench.action.focusPreviousGroup"
+  },
+  {
+    "key": "cmd+alt+1",
+    "command": "workbench.action.joinTwoGroups"
+  },
+  {
+    "key": "cmd+alt+w",
+    "command": "workbench.action.closeOtherEditors"
+  },
+  {
+    "key": "cmd+alt+r",
+    "command": "workbench.action.closeEditorsToTheRight"
+  },
+  // Multicursor
+  {
+    "key": "cmd+shift+d",
+    "command": "editor.action.selectHighlights"
+  },
+  {
+    "key": "cmd+shift+l",
+    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+    "when": "editorTextFocus"
+  },
+  // Previous and Next cursor position
+  {
+    "key": "cmd+[",
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "cmd+]",
+    "command": "workbench.action.navigateForward"
+  },
+  // Join lines
+  {
+    "key": "cmd+j",
+    "command": "editor.action.joinLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-editor.action.joinLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // Language-related stuff
+  {
+    "key": "cmd+l l",
+    "command": "workbench.action.editor.changeLanguageMode"
+  },
+  {
+    "key": "cmd+l r",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l f",
+    "command": "references-view.find",
+    "when": "editorHasReferenceProvider"
+  },
+  {
+    "key": "cmd+l d",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "cmd+l a",
+    "command": "editor.action.autoFix",
+    "when": "editorTextFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+  },
+  {
+    "key": "cmd+l e",
+    "command": "editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l q",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  // Finding errors
+  {
+    "key": "cmd+l n",
+    "command": "editor.action.marker.next",
+    "when": "editorFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l shift+n",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "editorFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l k",
+    "command": "workbench.action.editor.previousChange",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+l j",
+    "command": "workbench.action.editor.nextChange",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+l p",
+    "command": "editor.action.marker.prev",
+    "when": "editorFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l shift+p",
+    "command": "editor.action.marker.prevInFiles",
+    "when": "editorFocus && !editorReadonly"
+  },
+  // Jumpy (aka EasyMotion)
+  {
+    "key": "cmd+e r",
+    "command": "SQLTools.executeQuery",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+e r",
+    "command": "-SQLTools.executeQuery",
+    "when": "!editorTextFocus"
+  },
+  {
+    "key": "cmd+e h",
+    "command": "SQLTools.runFromHistory"
+  },
+  {
+    "key": "cmd+e cmd+h",
+    "command": "-SQLTools.runFromHistory"
+  },
+  {
+    "key": "cmd+e c",
+    "command": "SQLTools.selectConnection"
+  },
+  {
+    "key": "cmd+e d",
+    "command": "SQLTools.closeConnection"
+  },
+  {
+    "key": "cmd+e t",
+    "command": "SQLTools.describeTable"
+  },
+  {
+    "key": "cmd+e cmd+d",
+    "command": "-SQLTools.describeTable"
+  },
+  {
+    "key": "cmd+e cmd+e",
+    "command": "-SQLTools.executeQuery",
+    "when": "editorTextFocus"
+  },
+  // Make cmd t and p both work!
+  {
+    "key": "cmd+t",
+    "command": "-workbench.action.showAllSymbols"
+  },
+  {
+    "key": "cmd+t",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+e r",
+    "command": "vscode-postgres.runQuery",
+    "when": "editorLangId == 'postgres'"
+  },
+  {
+    "key": "f5",
+    "command": "-vscode-postgres.runQuery",
+    "when": "editorLangId == 'postgres'"
+  },
+  {
+    "key": "cmd+e t",
+    "command": "vscode-postgres.selectTop"
+  },
+  {
+    "key": "cmd+e n",
+    "command": "vscode-postgres.newQuery"
+  },
+  {
+    "key": "cmd+e e",
+    "command": "workbench.view.extension.postgres-explorer"
+  },
+  {
+    "key": "cmd+e s",
+    "command": "vscode-postgres.saveResult"
+  },
+  {
+    "key": "alt+o",
+    "command": "-C_Cpp.SwitchHeaderSource",
+    "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'"
+  },
+  {
+    "key": "alt+cmd+o",
+    "command": "-clangd.switchheadersource",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+l c",
+    "command": "alternate.alternateFile"
+  },
+  {
+    "key": "cmd+l shift+c",
+    "command": "alternate.alternateFileInSplit"
+  },
+  {
+    "key": "cmd+l cmd+c",
+    "command": "alternate.createAlternateFile"
+  },
+  {
+    "key": "cmd+l shift+cmd+c",
+    "command": "alternate.createAlternateFileInSplit"
+  },
+  {
+    "key": "shift+alt+q",
+    "command": "rewrap.rewrapCommentAt"
+  },
+  {
+    "key": "alt+cmd+t",
+    "command": "workbench.action.reopenClosedEditor"
+  },
+  {
+    "key": "shift+cmd+t",
+    "command": "-workbench.action.reopenClosedEditor"
+  },
+  {
+    "key": "cmd+k w",
+    "command": "editor.action.toggleWordWrap"
+  },
+  {
+    "key": "alt+z",
+    "command": "-editor.action.toggleWordWrap"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-selectAllSearchEditorMatches",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-addCursorsAtSearchResults",
+    "when": "fileMatchOrMatchFocus && searchViewletVisible"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-editor.action.selectHighlights",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+y",
+    "command": "extension.changeCase.camel"
+  },
+  {
+    "key": "shift+cmd+j",
+    "command": "-workbench.action.search.toggleQueryDetails",
+    "when": "inSearchEditor || searchViewletFocus"
+  },
+  {
+    "key": "shift+cmd+j",
+    "command": "editor.action.deleteLines",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+k",
+    "command": "-editor.action.deleteLines",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+l h",
+    "command": "clangd.switchheadersource"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "cmd+u",
+    "command": "-cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "cursorRedo"
+  },
+  {
+    "key": "ctrl+cmd+c",
+    "command": "issue.copyGithubPermalink",
+    "when": "!isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "-workbench.action.toggleFullScreen",
+    "when": "!isIOS"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "copyRelativeFilePath"
+  },
+  {
+    "key": "ctrl+cmd+c",
+    "command": "gitlens.copyRemoteFileUrlToClipboard"
+  },
+  {
+    "key": "alt+right",
+    "command": "editor.action.inlineSuggest.acceptNextWord",
+    "when": "cppSuggestion && !editorReadonly || inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "cmd+right",
+    "command": "-editor.action.inlineSuggest.acceptNextWord",
+    "when": "cppSuggestion && !editorReadonly || inlineSuggestionVisible && !editorReadonly"
+  }
+]

@@ -11,15 +11,11 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "Installing dotfiles from $DOTFILES_DIR"
 
 # Function to create symlink with backup
-link_file() {
-    local filename="$1"
-    local src="$DOTFILES_DIR/files/$filename"
-    # If filename already starts with a dot, don't add another one
-    if [[ "$filename" == .* ]]; then
-        local dest="$HOME/$filename"
-    else
-        local dest="$HOME/.$filename"
-    fi
+link_to() {
+    local src="$1"
+    local dest="$2"
+
+    mkdir -p "$(dirname "$dest")"
 
     # Backup existing file if it's not already a symlink
     if [ -e "$dest" ] && [ ! -L "$dest" ]; then
@@ -32,6 +28,19 @@ link_file() {
     echo "Linked $dest -> $src"
 }
 
+link_file() {
+    local filename="$1"
+    local src="$DOTFILES_DIR/files/$filename"
+    # If filename already starts with a dot, don't add another one
+    if [[ "$filename" == .* ]]; then
+        local dest="$HOME/$filename"
+    else
+        local dest="$HOME/.$filename"
+    fi
+
+    link_to "$src" "$dest"
+}
+
 # Check if files directory exists
 if [ ! -d "$DOTFILES_DIR/files" ]; then
     echo "Error: $DOTFILES_DIR/files directory not found"
@@ -39,16 +48,22 @@ if [ ! -d "$DOTFILES_DIR/files" ]; then
     exit 1
 fi
 
-# Link all files in the files directory
-# Enable dotglob to match hidden files
+# Link all dotfiles in the files directory
+# Files that don't start with "." get special handling below
 shopt -s dotglob nullglob
-for file in "$DOTFILES_DIR/files"/*; do
+for file in "$DOTFILES_DIR/files"/.*; do
     if [ -f "$file" ]; then
         filename=$(basename "$file")
         link_file "$filename"
     fi
 done
 shopt -u dotglob nullglob
+
+# Link app-specific config files
+EDITOR_KB="$DOTFILES_DIR/files/vscode-keybindings.json"
+link_to "$EDITOR_KB" "$HOME/Library/Application Support/Code/User/keybindings.json"
+link_to "$EDITOR_KB" "$HOME/Library/Application Support/Cursor/User/keybindings.json"
+link_to "$DOTFILES_DIR/files/warp-keybindings.yaml" "$HOME/.warp/keybindings.yaml"
 
 echo ""
 
