@@ -36,11 +36,42 @@ _git_sync() {
   git rebase "${rebase_args[@]}" "$branch"
 }
 
-# Wrapper so "git fresh" and "git sync" invoke the functions above
+# git tidy — delete local branches fully merged into the default branch
+_git_tidy() {
+  local default_branch="$(_git_default_branch)"
+  local current
+  current=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+  local -a to_delete=()
+  local branch
+  for branch in $(git branch --merged "$default_branch" --format='%(refname:short)'); do
+    # Never delete the default branch or the current branch
+    [[ "$branch" == "$default_branch" || "$branch" == "$current" ]] && continue
+    to_delete+=("$branch")
+  done
+
+  if (( ${#to_delete} == 0 )); then
+    echo "No merged branches to clean up."
+    return 0
+  fi
+
+  echo "Branches merged into $default_branch:"
+  printf '  %s\n' "${to_delete[@]}"
+  echo ""
+  read -q "?Delete these branches? [y/N] " || { echo; return 0; }
+  echo
+
+  for branch in "${to_delete[@]}"; do
+    git branch -d "$branch"
+  done
+}
+
+# Wrapper so "git fresh", "git sync", and "git tidy" invoke the functions above
 git() {
   case "$1" in
     fresh) shift; _git_fresh "$@" ;;
     sync)  shift; _git_sync "$@"  ;;
+    tidy)  shift; _git_tidy "$@"  ;;
     *)     command git "$@" ;;
   esac
 }
