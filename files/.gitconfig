@@ -41,7 +41,11 @@
 	username = peterkhayes
 
 [alias]
-  a = add
+  # `git git` mistakes
+  git = !exec git
+
+  # simple aliases
+  a = add 
   aa = add -A
   ap = add -p
   b = branch
@@ -57,26 +61,24 @@
   cp = cherry-pick
   cpa = cherry-pick --abort
   cpc = cherry-pick --continue
-  fix = commit --amend --no-edit -a
-  nb = checkout -b
+  nb = checkout -b # "new branch"
   p = push
   pf = push -f
   r = rebase
   ri = rebase -i
   ra = rebase --abort
   rc = rebase --continue
-  redo = commit --amend --no-edit
   s = status
+
+  # redo most recent commit
+  redo = commit --amend --no-edit
+  fix = redo -a
+
+  # other common workflows
   wip = cam "WIP" -n
   fix-push = "!git fix && git pf"
   fp = fix-push
-
-  sync-master = "!git fetch origin master:master"
-  sync-main = "!git fetch origin main:main"
-  sync-primary = "!git fetch origin $GIT_PRIMARY_BRANCH:$GIT_PRIMARY_BRANCH"
-  sync-branch = "!git fresh && git rebase stable"
-  sync-branch-master = "!git sync-master && git rebase master"
-  sync = sync-branch
-  fresh = "!git sync-master && git co stable && git pull --rebase origin stable"
-  git = !exec git
+   
+  # show recent work
   recent = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 40 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+
