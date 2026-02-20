@@ -1,4 +1,5 @@
 # Machine-specific configuration
+# Additional git commands (fresh, sync) are defined in ~/.git.zsh
 [include]
     path = ~/.gitconfig.local
 
