@@ -64,6 +64,7 @@ EDITOR_KB="$DOTFILES_DIR/files/vscode-keybindings.json"
 link_to "$EDITOR_KB" "$HOME/Library/Application Support/Code/User/keybindings.json"
 link_to "$EDITOR_KB" "$HOME/Library/Application Support/Cursor/User/keybindings.json"
 link_to "$DOTFILES_DIR/files/warp-keybindings.yaml" "$HOME/.warp/keybindings.yaml"
+link_to "$DOTFILES_DIR/files/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo ""
 
