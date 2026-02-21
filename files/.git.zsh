@@ -44,10 +44,21 @@ _git_tidy() {
 
   local -a to_delete=()
   local branch
-  for branch in $(git branch --merged "$default_branch" --format='%(refname:short)'); do
-    # Never delete the default branch or the current branch
+  local cutoff=$(date -v-90d +%s)
+
+  # Collect branches that are merged or stale (no commits in 90 days)
+  for branch in $(git branch --format='%(refname:short)'); do
     [[ "$branch" == "$default_branch" || "$branch" == "$current" ]] && continue
-    to_delete+=("$branch")
+    # Check if merged into default branch
+    if git merge-base --is-ancestor "$branch" "$default_branch" 2>/dev/null; then
+      to_delete+=("$branch")
+      continue
+    fi
+    # Check if last commit is older than 90 days
+    local last_commit=$(git log -1 --format='%ct' "$branch" 2>/dev/null)
+    if [[ -n "$last_commit" ]] && (( last_commit < cutoff )); then
+      to_delete+=("$branch")
+    fi
   done
 
   if (( ${#to_delete} == 0 )); then
@@ -62,7 +73,7 @@ _git_tidy() {
   echo
 
   for branch in "${to_delete[@]}"; do
-    git branch -d "$branch"
+    git branch -D "$branch"
   done
 }
 

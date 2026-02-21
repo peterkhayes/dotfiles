@@ -5,6 +5,13 @@
 
 set -e  # Exit on error
 
+if [ -z "$1" ]; then
+    echo "Usage: install.sh <email>"
+    exit 1
+fi
+
+GIT_EMAIL="$1"
+
 # Get the directory where this script is located
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -89,15 +96,14 @@ fi
 # Check if .gitconfig.local exists, create if not
 if [ ! -f "$HOME/.gitconfig.local" ]; then
     echo ""
-    echo "Setting up machine-specific git configuration..."
-    read -p "Enter your git email address: " git_email
-    
+    echo "Creating machine-specific git configuration file..."
+
     cat > "$HOME/.gitconfig.local" << EOF
 [user]
-    email = $git_email
+    email = $GIT_EMAIL
 EOF
-    
-    echo "Created ~/.gitconfig.local with email: $git_email"
+
+    echo "Created ~/.gitconfig.local with email: $GIT_EMAIL"
 else
     echo "~/.gitconfig.local already exists, skipping"
 fi

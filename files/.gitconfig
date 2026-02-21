@@ -5,7 +5,6 @@
 
 [user]
     name = Peter Hayes
-    # email is in .gitconfig.local
 
 [core]
   commitGraph = true
