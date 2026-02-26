@@ -109,4 +109,47 @@ else
 fi
 
 echo ""
+
+# Install delta (git pager)
+install_delta_via_dpkg() {
+    local arch
+    arch="$(dpkg --print-architecture)"
+    local version
+    version="$(curl -fsSL https://api.github.com/repos/dandavison/delta/releases/latest | grep '"tag_name"' | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')"
+    if [ -z "$version" ]; then
+        echo "Error: Could not determine latest delta version"
+        return 1
+    fi
+    local deb="/tmp/git-delta.deb"
+    curl -fsSL -o "$deb" "https://github.com/dandavison/delta/releases/download/${version}/git-delta_${version}_${arch}.deb"
+    sudo dpkg -i "$deb"
+    rm -f "$deb"
+}
+
+if command -v brew &>/dev/null; then
+    echo "Installing delta via Homebrew..."
+    brew install git-delta
+elif command -v pacman &>/dev/null; then
+    echo "Installing delta via pacman..."
+    sudo pacman -S --noconfirm git-delta
+elif command -v dnf &>/dev/null; then
+    echo "Installing delta via dnf..."
+    sudo dnf install -y git-delta
+elif command -v zypper &>/dev/null; then
+    echo "Installing delta via zypper..."
+    sudo zypper install -y git-delta
+elif command -v apt-get &>/dev/null; then
+    echo "Installing delta via apt..."
+    sudo apt-get install -y git-delta || {
+        echo "apt-get failed, falling back to dpkg..."
+        install_delta_via_dpkg || echo "Error: delta installation failed. Install manually: https://github.com/dandavison/delta"
+    }
+elif command -v dpkg &>/dev/null; then
+    echo "Installing delta via dpkg..."
+    install_delta_via_dpkg || echo "Error: delta installation failed. Install manually: https://github.com/dandavison/delta"
+else
+    echo "Error: No supported package manager found. Install delta manually: https://github.com/dandavison/delta"
+fi
+
+echo ""
 echo "Dotfiles installation complete!"
