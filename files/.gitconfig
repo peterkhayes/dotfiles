@@ -68,6 +68,7 @@
   ri = rebase -i
   ra = rebase --abort
   rc = rebase --continue
+  rh = reset --hard HEAD
   s = status
 
   # redo most recent commit
