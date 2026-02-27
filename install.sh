@@ -73,6 +73,14 @@ link_to "$EDITOR_KB" "$HOME/Library/Application Support/Cursor/User/keybindings.
 link_to "$DOTFILES_DIR/files/warp-keybindings.yaml" "$HOME/.warp/keybindings.yaml"
 link_to "$DOTFILES_DIR/files/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
+# Link git subcommand scripts into ~/.local/bin
+mkdir -p "$HOME/.local/bin"
+for script in "$DOTFILES_DIR/bin"/git-*; do
+    if [ -f "$script" ]; then
+        link_to "$script" "$HOME/.local/bin/$(basename "$script")"
+    fi
+done
+
 echo ""
 
 # Check if .zshrc.local exists, create if not

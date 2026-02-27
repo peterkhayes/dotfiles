@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# git sync [flags] [branch] — fetch a branch from remote, rebase the current branch on it.
+# Flags (e.g. -i) are passed through to git rebase.
+# Defaults to the repo's configured default branch (git config default-branch.name).
+set -e
+
+branch="$(git config --get default-branch.name 2>/dev/null || echo "main")"
+rebase_args=()
+
+for arg in "$@"; do
+  if [[ "$arg" == -* ]]; then
+    rebase_args+=("$arg")
+  else
+    branch="$arg"
+  fi
+done
+
+git fetch origin "$branch"
+
+# Update local branch ref if we're not currently on it
+current=$(git symbolic-ref --short HEAD 2>/dev/null)
+if [[ "$current" != "$branch" ]]; then
+  git branch -f "$branch" "origin/$branch" 2>/dev/null || true
+fi
+
+git rebase "${rebase_args[@]}" "$branch"

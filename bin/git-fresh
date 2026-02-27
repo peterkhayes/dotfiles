@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# git fresh [branch] — check out a branch and update it from remote.
+# Defaults to the repo's configured default branch (git config default-branch.name).
+set -e
+
+branch="${1:-$(git config --get default-branch.name 2>/dev/null || echo "main")}"
+git fetch origin "$branch"
+git checkout "$branch"
+git rebase "origin/$branch"
