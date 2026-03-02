@@ -17,6 +17,7 @@ to_delete=()
 
 for branch in $(git branch --format='%(refname:short)'); do
   [[ "$branch" == "$default_branch" || "$branch" == "$current" ]] && continue
+  [[ "$branch" == "master" || "$branch" == "main" || "$branch" == "stable" ]] && continue
 
   # Check if merged into default branch
   if git merge-base --is-ancestor "$branch" "$default_branch" 2>/dev/null; then
