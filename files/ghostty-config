@@ -1,0 +1,24 @@
+# Ghostty configuration
+# Docs: https://ghostty.org/docs/config
+
+# ── Tabs ──────────────────────────────────────────────────────────────────────
+keybind = super+t=new_tab
+keybind = super+w=close_surface
+keybind = alt+super+right=next_tab
+keybind = alt+super+left=previous_tab
+
+# ── Splits ────────────────────────────────────────────────────────────────────
+# Create splits
+keybind = ctrl+shift+super+right=new_split:right
+keybind = ctrl+shift+super+left=new_split:left
+keybind = ctrl+shift+super+down=new_split:down
+keybind = ctrl+shift+super+up=new_split:up
+# Navigate splits
+keybind = ctrl+super+right=goto_split:right
+keybind = ctrl+super+left=goto_split:left
+keybind = ctrl+super+up=goto_split:up
+keybind = ctrl+super+down=goto_split:down
+
+# ── Scrollback ────────────────────────────────────────────────────────────────
+keybind = super+home=scroll_to_top
+keybind = super+end=scroll_to_bottom
