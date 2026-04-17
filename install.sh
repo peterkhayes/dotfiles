@@ -72,6 +72,7 @@ link_to "$EDITOR_KB" "$HOME/Library/Application Support/Code/User/keybindings.js
 link_to "$EDITOR_KB" "$HOME/Library/Application Support/Cursor/User/keybindings.json"
 link_to "$DOTFILES_DIR/files/warp-keybindings.yaml" "$HOME/.warp/keybindings.yaml"
 link_to "$DOTFILES_DIR/files/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_to "$DOTFILES_DIR/files/claude-keybindings.json" "$HOME/.claude/keybindings.json"
 link_to "$DOTFILES_DIR/files/ghostty-config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
 
 # Link git subcommand scripts into ~/.local/bin
