@@ -1,3 +1,9 @@
+*Written with AI*
+
+# Authorship
+
+- Any large block of persistent documentation authored by an AI agent, excluding inline code comments, must begin with the standalone line *Written with AI*. This requirement does not apply to conversational responses.
+
 # Security
 
 Follow these guidelines UNLESS operating in yolo/dangerous mode.
@@ -22,6 +28,18 @@ I will not give permission for arbitrary code execution commands like `python3` 
   - The goal is readability; important or complicated changes should be in small commits, while rote work can be in larger commits
   - Individual commits do not need to compile or pass tests, only the branch
   - Rewriting history to keep branches clean is encouraged
+
+*Written with AI*
+
+## Pull Request Descriptions
+
+Write pull request descriptions for a human reviewer who has not followed the implementation work. Keep them concise, but give the reviewer enough context to understand why the change matters and how its important parts fit together.
+
+- Start with a short `## Problem` section that motivates the change. Describe the concrete limitation or need, why it matters now, and any relevant constraint or future direction.
+- Follow with a `## Changes` section. Summarize the solution as a logical list of changes rather than a file-by-file changelog.
+- Spell out important changes to interfaces, schemas, data shapes, or caller-visible behavior. Include small representative examples—such as before-and-after signatures, data shapes, or usage snippets—when they make the new contract clearer.
+- End with a `## Test Plan` section describing the concrete validation performed or still needed.
+- Apply this structure to AI-authored pull requests too. Do not use terse, mechanical summaries that omit the motivation or leave reviewers to reconstruct interface changes from the diff.
 
 # Code Quality
 
